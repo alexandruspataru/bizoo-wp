@@ -244,10 +244,11 @@ function bizoo_feed_order_criteria_render() {
  */ 
 function bizoo_feed_admin_page() { 
 
+
 ?>
 
 <div class="wrap bizoo-wrap">
-
+	
 	<!-- Page info -->
 	<div class="bs-callout bs-callout-info" id="callout-help-text-accessibility">
 		
@@ -263,6 +264,9 @@ function bizoo_feed_admin_page() {
 				?>
 				
 				<div class="clear">&nbsp;</div>
+				
+				<!-- Desciption -->
+				<h4><?php echo _x('The feed location is:', 'Admin page content', 'nexus'); ?> <a href="<?php echo home_url('/bizoo.xml'); ?>" target="_blank" style="color:#000"><?php echo home_url('/bizoo.xml'); ?></a></h4>
 
 		</form>
 		

@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Data Feed plugin for Bizoo.ro\n"
+"POT-Creation-Date: 2017-04-09 16:01+0300\n"
+"PO-Revision-Date: 2017-04-09 16:06+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: bizoo-wp.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: inc/options.php:18
+msgctxt "Admin page title"
+msgid "Bizoo Data Feed Tool"
+msgstr "Utilitar Feed Bizoo"
+
+#: inc/options.php:19
+msgctxt "Admin menu"
+msgid "Bizoo Feed"
+msgstr "Bizoo Feed"
+
+#: inc/options.php:45
+msgctxt "Admin page content"
+msgid "Bizoo Feed Settings"
+msgstr "Setari Feed Bizoo"
+
+#: inc/options.php:54
+msgctxt "Admin page content"
+msgid "Please select the post type you would like to include in the Data Feed."
+msgstr "Va rog sa selectati tipul posturilor care vor fi incluse in Feed."
+
+#: inc/options.php:69
+msgctxt "Admin page content"
+msgid "Optional - How many posts to include? Leave blank to include them all."
+msgstr ""
+"Optional - Cate postari sa includem? Lasa gol pentru a le include pe toate."
+
+#: inc/options.php:84
+msgctxt "Admin page content"
+msgid "Optional - Order type"
+msgstr "Optional - Tipul ordonarii"
+
+#: inc/options.php:99
+msgctxt "Admin page content"
+msgid "Optional - Order criteria"
+msgstr "Optional - Criteriu de ordonare"
+
+#: inc/options.php:131 inc/options.php:181 inc/options.php:224
+msgctxt "Admin page content"
+msgid "Please choose something"
+msgstr "Va rog alegeti ceva"
+
+#: inc/options.php:184
+msgctxt "Admin page content"
+msgid "Ascending"
+msgstr "Ascendent"
+
+#: inc/options.php:187
+msgctxt "Admin page content"
+msgid "Descending"
+msgstr "Descrescator"
+
+#: inc/options.php:204
+msgctxt "Admin page content"
+msgid "None"
+msgstr "Niciuna"
+
+#: inc/options.php:205
+msgctxt "Admin page content"
+msgid "Random"
+msgstr "Aleator"
+
+#: inc/options.php:206
+msgctxt "Admin page content"
+msgid "ID"
+msgstr "ID"
+
+#: inc/options.php:207
+msgctxt "Admin page content"
+msgid "Date inserted"
+msgstr "Data publicarii"
+
+#: inc/options.php:208
+msgctxt "Admin page content"
+msgid "Date modified"
+msgstr "Data ultimei modificari"
+
+#: inc/options.php:209
+msgctxt "Admin page content"
+msgid "Title"
+msgstr "Titlu"
+
+#: inc/options.php:210
+msgctxt "Admin page content"
+msgid "Parent ID"
+msgstr "ID Parinte"
+
+#: inc/options.php:211
+msgctxt "Admin page content"
+msgid "Comment Count"
+msgstr "Numarul de comentarii"
+
+#: inc/options.php:268
+msgctxt "Admin page content"
+msgid "The feed location is:"
+msgstr "Locatia feed-ului este:"
+
+#. Plugin Name of the plugin/theme
+msgid "Data Feed plugin for Bizoo.ro"
+msgstr "Modul pentru Feed Bizoo.ro"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/alexandruspataru/bizoo-wp"
+msgstr "https://github.com/alexandruspataru/bizoo-wp"
+
+#. Description of the plugin/theme
+msgid ""
+"The plugin helps you syncronize your products (or any custom post type) with "
+"Bizoo platform"
+msgstr ""
+"Modulul va ajuta sa sincronizati produsele (sau orice tip de postare custom) "
+"cu platforma Bizoo"
+
+#. Author of the plugin/theme
+msgid "Alex Spataru"
+msgstr "Alex Spataru"
+
+#. Author URI of the plugin/theme
+msgid "https://alexspataru.com"
+msgstr "https://alexspataru.com"
