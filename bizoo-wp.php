@@ -32,7 +32,6 @@ function bizoo_feed_settings($data = ''){
 	
 }
 
-
 /* 
  * Helpers
  */ 

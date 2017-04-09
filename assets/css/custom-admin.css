@@ -1,85 +1,7 @@
-.icon-graitec,
-.widget-icon.icon-graitec{
-	background-size: cover;
-	background-image: url('../img/icon-graitec.png');
-}
-
-.siteorigin-widget-field-type-select select{
-	min-width:300px;
-}
-
-.siteorigin-widget-field-portfolio_categories select{
-	min-height:300px;
-}
-
-/**
- * Tabs
- */
-
-.pt-widget-single-tab {
-	border: 1px solid rgba(0,0,0,0.1);
-	background-color: rgba(0,0,0,0.03);
-	margin-bottom: 10px;
-}
-
-.pt-remove-tab {
-	text-decoration: none;
-}
-
-.siteorigin-panels-builder--pt-tabs.siteorigin-panels-builder .so-builder-toolbar {
-	background: #e5f4fa;
-}
-
-.siteorigin-panels-builder--pt-tabs {
-	padding: 10px 10px 0;
-	background: #f9f9f9;
-	border: 1px solid #dddddd;
-}
-
-.pt-tab-setting__header {
-	position: relative;
-	padding: 10px;
-	background-color: #dddddd;
-	color: #777777;
-	cursor: move;
-}
-
-.pt-tab-setting__header-title {
-	color: initial;
-	font-weight: bold;
-}
-
-.pt-tab-setting__toggle {
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	margin-top: -16px;
-	padding: 6px;
-	cursor: pointer;
-}
-
-.pt-tab-setting__content {
-	padding: 0 10px;
-}
-
-.pt-tab-setting__placeholder {
-	border: 1px dotted #777777;
-	height: 40px;
-	margin-bottom: 10px;
-}
-
-.pt-tab-setting__content .so-cells .cell{
-	width:100%;
-}
-
-/* TinyMCE Advanced - table fix */
-.mce-item-table{
-	width:100% !important;
-}
-
-/* Admin menu - bigger select pages */
-.posttypediv div.tabs-panel{
-	max-height:600px;
+.bizoo-wrap{
+	max-width:1200px;
+	float:none;
+	margin: 50px auto;
 }
 
 /*
@@ -88,8 +10,11 @@
  * Not quite alerts, but custom and helpful notes for folks reading the docs.
  * Requires a base and modifier class.
  */
+ 
+/* 
+ * Common styles for all types
+ */
 
-/* Common styles for all types */
 .bs-callout {
 	padding: 20px;
 	margin: 20px 0;
@@ -112,13 +37,17 @@
 .bs-callout code {
   border-radius: 3px;
 }
+/* 
+ * Tighten up space between multiple callouts
+ */
 
-/* Tighten up space between multiple callouts */
 .bs-callout + .bs-callout {
   margin-top: -5px;
 }
 
-/* Variations */
+/* 
+ * Variations
+ */
 .bs-callout-danger {
   border-left-color: #ce4844;
 }
@@ -144,62 +73,9 @@
   color: #5cb85c;
 }
 
-
-
-
-/* Network Metaboxes */
-.graitec-admin-page{
-	max-width:1170px;
-	margin:0 auto;
-	padding:0 15px;
-}
-
-.graitec-metabox-content{
-	
-}
-
-.graitec-metabox-content h4 {
-  color: #1b809e;
-}
-
-.graitec-metabox-content.small{
-	max-width:700px;
-	float:none;
-	margin:0 auto 50px auto;
-}
-
-/* Network admin forms */
-.graitec-metabox-content .form-group{
-	clear:both;
-	margin-bottom:20px;
-	min-height: 50px;
-}
-
-.graitec-metabox-content .form-vertical .control-label{
-	padding-left:0;
-}
-
-.graitec-metabox-content select{
-	padding: 10px;
-	height: 40px;
-	line-height: 20px;
-	border: 1px solid #000;
-}
-
-.graitec-metabox-content select:focus{
-	border: 1px solid #5cb85c;
-}
-
-.graitec-metabox-content button, 
-.graitec-metabox-content input, 
-.graitec-metabox-content button:focus, 
-.graitec-metabox-content input:focus, 
-.graitec-metabox-content button:active, 
-.graitec-metabox-content input:active{
-	outline:none;
-}
-
-/* Fix debug notices that were overflowing the container */
+/* 
+ * Fix debug notices that were overflowing the container
+ */
 pre{
 	word-break: break-all;
 	word-wrap: break-word;
@@ -207,9 +83,35 @@ pre{
 	overflow: hidden;
 }
 
-/* Graitec custom editor buttons */
-.mce-ico.gtc{
-	background:#004071 !important;
-	color:#fff !important;
-	font-size: 14px;
+/* 
+ * Form
+ */
+.bizoo-form{
+	
+}
+
+.bizoo-form .form-group{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.bizoo-form .form-group:after{
+	clear:both;
+	content:'';
+	display:table;
+}
+
+.bizoo-form select,
+.bizoo-form select:focus,
+.bizoo-form select:active{
+	border: solid 1px #000;
+}
+
+/* 
+ * Responsive
+ */
+@media screen and (min-width: 768px) {
+	
+	.bizoo-form label							{padding-left:0;}
+	
 }
