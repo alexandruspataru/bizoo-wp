@@ -31,70 +31,213 @@ function bizoo_feed_admin_menu() {
 }
 
 /* 
- * Please remember to sanitize the data before inseting it into database
+ * Add the settings section
  */ 
+add_action( 'admin_init', 'bizoo_feed_settings_init' );
+function bizoo_feed_settings_init() { 
 
-if(isset($_POST['bizoo_save_changes'])){
-	
+	// Register the settings 
+	register_setting( 'bizoo_feed', 'bizoo_feed_settings' );
+
+	// Add settings section
+	add_settings_section(
+		'bizoo_feed_section', 
+		_x('Bizoo Feed Settings', 'Admin page content', 'nexus'), 
+		'bizoo_feed_section_callback', 
+		'bizoo_feed'
+	);
+
 	/* 
-	 * Custom post type
+	 * Register Field 1 - Post type
 	 */ 
-	if(isset($_POST['bizoo_post_type']) && !empty($_POST['bizoo_post_type'])){
-		
-		// Get the list of avaliable post types
-		
-		$postTypes = get_post_types(array('public' => true, '_builtin' => false), 'objects', 'or');
-		
-		$sanitizedPostTypes = array(); 
-		
-		foreach($postTypes as $postType){
-			
-			$sanitizedPostTypes[] = $postType->name;
-			
-		}
-		
-		// If we have a match, go ahead
-		if( in_array($_POST['bizoo_post_type'], $sanitizedPostTypes) ) {
-			
-			echo $_POST['bizoo_post_type'] . '<br>';
-			
-		}
-		
-	}
+	$label1		 =  '<label for="bizoo_feed_settings[post_type]" class="control-label">';
+	$label1		.=  _x('Please select the post type you would like to include in the Data Feed.', 'Admin page content', 'nexus');
+	$label1		.=  '</label>';
 	
+	add_settings_field( 
+		'post_type', 
+		$label1, 
+		'bizoo_feed_post_type_render', 
+		'bizoo_feed', 
+		'bizoo_feed_section' 
+	);
+
 	/* 
-	 * Posts limit
+	 * Register Field 2 - Select limit
 	 */ 
-	if(isset($_POST['bizoo_post_limit']) && is_numeric($_POST['bizoo_post_limit'])){
-		
-		echo $_POST['bizoo_post_limit'] . '<br>';
-		
-	}
+	$label2		 =  '<label for="bizoo_feed_settings[post_limit]" class="control-label">';
+	$label2		.=  _x('Optional - How many posts to include? Leave blank to include them all.', 'Admin page content', 'nexus');
+	$label2		.=  '</label>';
 	
+	add_settings_field( 
+		'post_limit', 
+		$label2, 
+		'bizoo_feed_post_limit_render', 
+		'bizoo_feed', 
+		'bizoo_feed_section' 
+	);
+
 	/* 
-	 * Order type
+	 * Register Field 3 - Order type
 	 */ 
-	if(isset($_POST['bizoo_post_order_type']) && $_POST['bizoo_post_order_type'] == 'ASC' ||  $_POST['bizoo_post_order_type'] == 'DESC' ){
-		
-		echo $_POST['bizoo_post_order_type'] . '<br>';
-		
-	}
+	$label3		 =  '<label for="bizoo_feed_settings[order_type]" class="control-label">';
+	$label3		.=  _x('Optional - Order type', 'Admin page content', 'nexus');
+	$label3		.=  '</label>';
 	
+	add_settings_field( 
+		'order_type', 
+		$label3, 
+		'bizoo_feed_order_type_render', 
+		'bizoo_feed', 
+		'bizoo_feed_section' 
+	);
+
 	/* 
-	 * Order criteria
+	 * Register Field 4 - Order criteria
 	 */ 
-	$orderCriteria = array('none', 'rand', 'id', 'date', 'modified', 'title', 'name', 'parent', 'comment_count');
+	$label4		 =  '<label for="bizoo_feed_settings[order_criteria]" class="control-label">';
+	$label4		.=  _x('Optional - Order criteria', 'Admin page content', 'nexus');
+	$label4		.=  '</label>';
 	
-	if(isset($_POST['bizoo_post_order_criteria']) && in_array($_POST['bizoo_post_order_criteria'], $orderCriteria)){
-		
-		echo $_POST['bizoo_post_order_criteria'] . '<br>'; 
-		
-		
-	}
+	add_settings_field( 
+		'order_criteria', 
+		$label4, 
+		'bizoo_feed_order_criteria_render', 
+		'bizoo_feed', 
+		'bizoo_feed_section' 
+	);
 
 }
 
+// Page content callback
+function bizoo_feed_section_callback() {
 
+}
+
+// Callback Field 1 - Post type
+function bizoo_feed_post_type_render(  ) { 
+
+	// Get all post types
+	$post_types = get_post_types(array('public' => true,'_builtin' => false,), 'objects', 'or');
+
+	// Wrapper start
+	$html		= '<div class="form-group">';
+	
+	// Get options
+	$options	= get_option( 'bizoo_feed_settings' );
+
+	// Seect start
+	$html		.=  '<div class=""><select class="form-control" id="bizoo_feed_settings[post_type]" name="bizoo_feed_settings[post_type]">';
+	$html		.=  '<option value="" ' . ($options['post_type'] == '' ? 'selected' : '') . '>' . _x('Please choose something', 'Admin page content', 'nexus') . '</option>';
+	
+	// Loop trought options
+	foreach($post_types as $type){
+		
+		// Get current field
+		$selected = '';
+		if($options['post_type'] == $type->name)
+			$selected = 'selected';
+									
+		$html	.= '<option value="' . $type->name . '" ' . $selected . '>' . $type->label . '</option>';
+		
+	}
+	
+	$html		.=  '</select></div>';
+	
+	// Wrapper end
+	$html		.=  '</div>';
+	
+	echo $html;
+	
+
+}
+
+// Callback Field 2 - Select limit
+function bizoo_feed_post_limit_render() { 
+
+	// Get options
+	$options	= get_option( 'bizoo_feed_settings' );
+
+	// Wrapper 
+	$html = '<input type="number" name="bizoo_feed_settings[post_limit]" value="' .  $options['post_limit'] . '">';
+	
+	echo $html;
+	
+}
+
+// Callback Field 3 - Order type
+function bizoo_feed_order_type_render() { 
+
+	// Wrapper start
+	$html		= '<div class="form-group">';
+	
+	// Get options
+	$options	= get_option( 'bizoo_feed_settings' );
+
+	// Seect start
+	$html		.=  '<div class=""><select class="form-control" id="bizoo_feed_settings[order_type]" name="bizoo_feed_settings[order_type]">';
+	
+	// Option 1 - nothing
+	$html		.=  '<option value="" ' . ($options['order_type'] == '' ? 'selected' : '') . '>' . _x('Please choose something', 'Admin page content', 'nexus') . '</option>';
+	
+	// Option 2 - Ascending
+	$html		.=  '<option value="ASC" ' . ($options['order_type'] == 'ASC' ? 'selected' : '') . '>' . _x('Ascending', 'Admin page content', 'nexus') . '</option>';
+	
+	// Option 3 - Descending
+	$html		.=  '<option value="DESC" ' . ($options['order_type'] == 'DESC' ? 'selected' : '') . '>' . _x('Descending', 'Admin page content', 'nexus') . '</option>';
+	
+
+	$html		.=  '</select></div>';
+	
+	// Wrapper end
+	$html		.=  '</div>';
+	
+	echo $html;
+	
+}
+
+// Callback Field 4 - Order criteria
+function bizoo_feed_order_criteria_render() { 
+
+	// Store all the possibilities
+	$orderType = array(		
+		'none'				=> _x('None', 'Admin page content', 'nexus'),
+		'rand'				=> _x('Random', 'Admin page content', 'nexus'),
+		'id' 				=> _x('ID', 'Admin page content', 'nexus'),
+		'date'				=> _x('Date inserted', 'Admin page content', 'nexus'),
+		'modified'			=> _x('Date modified', 'Admin page content', 'nexus'),
+		'title'				=> _x('Title', 'Admin page content', 'nexus'),
+		'parent'			=> _x('Parent ID', 'Admin page content', 'nexus'),
+		'comment_count'		=> _x('Comment Count', 'Admin page content', 'nexus'),
+	);
+
+	// Wrapper start
+	$html		= '<div class="form-group">';
+	
+	// Get options
+	$options	= get_option( 'bizoo_feed_settings' );
+
+	// Seect start
+	$html		.=  '<div class=""><select class="form-control" id="bizoo_feed_settings[order_criteria]" name="bizoo_feed_settings[order_criteria]">';
+	
+	// Option 1 - nothing
+	$html		.=  '<option value="" ' . ($options['order_criteria'] == '' ? 'selected' : '') . '>' . _x('Please choose something', 'Admin page content', 'nexus') . '</option>';
+	
+	// Other options
+	foreach($orderType as $value=>$name){
+		
+		$html		.=  '<option value="' . $value .'" ' . ($options['order_criteria'] == $value ? 'selected' : '') . '>' . $name . '</option>';
+		
+	}
+
+	$html		.=  '</select></div>';
+	
+	// Wrapper end
+	$html		.=  '</div>';
+	
+	echo $html;
+	
+}
 
 /* 
  * Admin page content
@@ -107,133 +250,26 @@ function bizoo_feed_admin_page() {
 
 	<!-- Page info -->
 	<div class="bs-callout bs-callout-info" id="callout-help-text-accessibility">
-	
-		<!-- Debug -->
-		<div class="hiddden">
-			<pre>
-				<?php var_dump($_POST); ?>
-			</pre>
-		</div>
-		
-		<!-- Page title -->
-		<h4><?php echo _x('Bizoo Feed Settings', 'Admin page content', 'nexus'); ?></h4> <br>
 		
 		<!-- Form start -->
-		<form class="form-vertical bizoo-form" action="" method="post">
-	
-				<!-- Select custom post type -->
-				<div class="form-group">
+		<form class="form-vertical bizoo-form" action="options.php" method="post">
 
-					<label for="bizoo_post_type" class="col-lg-6 control-label">
-						<?php echo _x('Please select the post type you would like to include in the Data Feed.', 'Admin page content', 'nexus'); ?>
-					</label>
-					
-					<div class="col-lg-6">
-						<select class="form-control" id="bizoo_post_type" name="bizoo_post_type">
-							<option value="" selected><?php echo _x('Please choose something', 'Admin page content', 'nexus'); ?></option>
-							<?php 
-							
-								/* 
-								 * Get all post types
-								 */ 
-								 
-								$postArgs = array(
-									'public' => true,
-									'_builtin' => false,
-								);
+				<?php 
 								
-								$post_types = get_post_types($postArgs, 'objects', 'or');
-								
-								foreach($post_types as $type){
-									
-									echo '<option value="' . $type->name . '">' . $type->label . '</option>';
-									
-								}
+					settings_fields( 'bizoo_feed' );
+					do_settings_sections( 'bizoo_feed' );
+					submit_button();
 
-							?>
-						</select>
-					</div>
-					
-				</div>
-				
-				<!-- Select limit -->
-				<div class="form-group">
-
-					<label for="bizoo_post_limit" class="col-lg-6 control-label">
-						<?php echo _x('Optional - How many posts to include? Leave blank to include them all.', 'Admin page content', 'nexus'); ?>
-					</label>
-					
-					<div class="col-lg-6">
-						<input type="number" class="form-control" id="bizoo_post_limit" name="bizoo_post_limit" placeholder="<?php echo _x('All', 'Admin page content', 'nexus'); ?>">
-					</div>
-					
-				</div>
-				
-				<!-- Select Order type -->
-				<div class="form-group">
-
-					<label for="bizoo_post_order_type" class="col-lg-6 control-label">
-						<?php echo _x('Optional - Order type', 'Admin page content', 'nexus'); ?>
-					</label>
-					
-					<div class="col-lg-6">
-					
-						<select class="form-control" id="bizoo_post_order_type" name="bizoo_post_order_type">
-							<option value="" selected><?php echo _x('Please choose something', 'Admin page content', 'nexus'); ?></option>
-							<option value="ASC"><?php echo _x('Ascending', 'Admin page content', 'nexus'); ?></option>
-							<option value="DESC"><?php echo _x('Descending', 'Admin page content', 'nexus'); ?></option>
-						</select>
-						
-					</div>
-					
-				</div>
-
-				<!-- Select Order criteria -->
-				<div class="form-group">
-
-					<label for="bizoo_post_order_criteria" class="col-lg-6 control-label">
-						<?php echo _x('Optional - Order criteria', 'Admin page content', 'nexus'); ?>
-					</label>
-					
-					<div class="col-lg-6">
-						
-						<select class="form-control" id="bizoo_post_order_criteria" name="bizoo_post_order_criteria">
-							<option value="" selected><?php echo _x('Please choose something', 'Admin page content', 'nexus'); ?></option>
-							<option value="none"><?php echo _x('None', 'Admin page content', 'nexus'); ?></option>
-							<option value="rand"><?php echo _x('Random', 'Admin page content', 'nexus'); ?></option>
-							<option value="id"><?php echo _x('ID', 'Admin page content', 'nexus'); ?></option>
-							<option value="date"><?php echo _x('Date inserted', 'Admin page content', 'nexus'); ?></option>
-							<option value="modified"><?php echo _x('Date modified', 'Admin page content', 'nexus'); ?></option>
-							<option value="title"><?php echo _x('Title', 'Admin page content', 'nexus'); ?></option>
-							<option value="name"><?php echo _x('Slug', 'Admin page content', 'nexus'); ?></option>
-							<option value="parent"><?php echo _x('Parent ID', 'Admin page content', 'nexus'); ?></option>
-							<option value="comment_count"><?php echo _x('Comment Count', 'Admin page content', 'nexus'); ?></option>
-						</select>
-						
-					</div>
-					
-				</div>
-
-				<div class="clear">&nbsp;</div>
-				
-				<!-- Submit / Reset -->
-				<div class="col-md-9 col-md-offset-3 text-right">
-					<button type="reset" class="btn btn-primary"><?php echo _x('Reset', 'Admin page content', 'nexus'); ?></button>
-					<button type="submit" id="bizoo_save_changes" name="bizoo_save_changes" class="btn btn-success ml-5"><?php echo _x('Save changes', 'Admin page content', 'nexus'); ?></button>
-				</div>
+				?>
 				
 				<div class="clear">&nbsp;</div>
-				
+
 		</form>
 		
 		<div class="clear">&nbsp;</div>
-		
 
-
-		
-		
-		
 	</div>
 </div>
 
 <?php } // End Wrapper
+

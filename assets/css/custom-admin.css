@@ -90,9 +90,16 @@ pre{
 	
 }
 
-.bizoo-form .form-group{
-	margin-top:15px;
-	margin-bottom:15px;
+.bizoo-form table.form-table{
+	width:100%;
+}
+
+.bizoo-form input[type="text"], 
+.bizoo-form input[type="email"], 
+.bizoo-form input[type="number"]{
+	width:100%;
+	padding: 8px 16px !important;
+	height: 39px;
 }
 
 .bizoo-form .form-group:after{
@@ -111,6 +118,9 @@ pre{
  * Responsive
  */
 @media screen and (min-width: 768px) {
+	
+	.bizoo-form table.form-table th{width:50%;}
+	.bizoo-form table.form-table td{width:50%;}
 	
 	.bizoo-form label							{padding-left:0;}
 	
