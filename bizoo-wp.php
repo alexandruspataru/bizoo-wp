@@ -2,7 +2,7 @@
 /*
 Plugin Name: Data Feed plugin for Bizoo.ro
 Plugin URI: https://github.com/alexandruspataru/bizoo-wp
-Version: 1.0.2
+Version: 1.0.3
 Description: The plugin helps you syncronize your products (or any custom post type) with Bizoo platform
 Author: Alex Spataru
 Author URI: https://alexspataru.com

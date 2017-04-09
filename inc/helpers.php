@@ -122,10 +122,21 @@ function bizoo_feed_sitemap_content () {
 				$title = str_replace('&#038;', '&', $title);
 				
 				// Categories
+				$categoriesList = array();
 				if(taxonomy_exists('produse'))
-					$categories = wp_get_post_terms($productID, 'produse', array("fields" => "names"));
-				else
+					$categoriesList = wp_get_post_terms($productID, 'produse', array("fields" => "names"));
+				else{
+					
 					$categories = get_the_category();
+					foreach($categories as $cat){
+						
+						$categoriesList[] = $cat->name;
+						
+					}
+					
+					
+				}
+					
 				
 				// Tags
 				$tags		= get_the_tags();
@@ -166,7 +177,7 @@ function bizoo_feed_sitemap_content () {
 				$html .= "\n\t\t" . '<name><![CDATA[' . $title . ']]></name>' ;
 				
 				// Output the category
-				$html .= "\n\t\t" . '<category><![CDATA[' . implode(', ', $categories) . ']]></category>' ;
+				$html .= "\n\t\t" . '<category><![CDATA[' . implode(', ', $categoriesList) . ']]></category>' ;
 				
 				// Output the model
 				$html .= "\n\t\t" . '<model><![CDATA[]]></model>' ;

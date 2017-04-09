@@ -1,3 +1,6 @@
+#### 1.0.3
+* __Fixed__ a fatal error when loading the categories from posts
+
 #### 1.0.2
 * __Added__ flush_rewrite_rules on plugin de/activation 
 * __Added__ rewrite rules
