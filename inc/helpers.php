@@ -4,7 +4,7 @@
  * Helpers page
  */ 
 
-/* Keep your sh*t secure, always! */
+/* Disable execution outside WP */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /* 

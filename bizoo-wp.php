@@ -12,7 +12,7 @@ GitHub Plugin URI: alexandruspataru/bizoo-wp
 GitHub Plugin URI: https://github.com/alexandruspataru/bizoo-wp
 */
 
-/* Keep your sh*t secure, always! */
+/* Disable execution outside WP */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /* 
